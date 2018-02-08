@@ -1,0 +1,9 @@
+{
+    "host": "localhost",
+    "user": "russ",
+    "password": "llama6969",
+    "database": "una_api",
+    "protocol": "mysql",
+    "port": "3306",
+    "query": {"pool": true}
+}
