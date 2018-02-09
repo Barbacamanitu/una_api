@@ -32,6 +32,26 @@ module.exports = (db) => {
             })
         }
 
+
+        StudentModel.searchByAttendance = async(pid,attended) => {
+            var sql =  `SELECT s.id, s.name, sp.attended
+            FROM student as s
+            INNER JOIN student_professor as sp
+            ON sp.student_id = s.id
+            WHERE sp.professor_id = ?
+            AND sp.attended = ?`;
+            return new Promise((resolve,reject) => {
+                db.driver.execQuery(sql,[pid,attended],(err,data) => {
+                    if (err){
+                        reject(err);
+                    } else {
+                        resolve(data);
+                    }
+                });
+            });
+            
+        }
+
         StudentModel.oneByProfessorID = async (pid,id) => {
             var sql = `
             SELECT s.id, s.name, sp.attended

@@ -21,9 +21,15 @@ module.exports = (db) => {
             return await  ProfessorModel.getAsync(id);
         }
 
-        ProfessorModel.byName = async (n) => {
-            return await  ProfessorModel.findAsync({name: orm.like("%" + n + "%")});
+        //Search stuff
+        ProfessorModel.search = async(query) => {
+            var searchQuery = {};
+            if (query.name){
+                searchQuery.name = orm.like("%" + query.name + "%");
+            }
+            return await ProfessorModel.findAsync(searchQuery);
         }
+
         return ProfessorModel;
 }
 
